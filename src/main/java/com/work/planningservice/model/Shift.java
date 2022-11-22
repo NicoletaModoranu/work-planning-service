@@ -1,4 +1,4 @@
-package com.work.planningservice;
+package com.work.planningservice.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
