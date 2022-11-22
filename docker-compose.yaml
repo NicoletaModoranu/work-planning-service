@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8.0
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'schedule'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'user'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'password'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_TCP_PORT: 3307
+    ports:
+      - '3307:3307'
+    volumes:
+      - db:/var/lib/mysql
+volumes:
+  db:
+    driver: local
+
+#
+#    https://geshan.com/np/blog/2022/02/mysql-docker-compose/
