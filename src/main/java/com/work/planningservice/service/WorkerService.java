@@ -28,7 +28,7 @@ public class WorkerService {
         if (worker.isPresent()) {
             return worker.get();
         } else {
-            throw new SchedulerException("THe worker with id " + id + " was not found");
+            throw new SchedulerException("The worker with id " + id + " was not found");
         }
     }
 
