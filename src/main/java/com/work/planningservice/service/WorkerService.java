@@ -1,7 +1,7 @@
 package com.work.planningservice.service;
 
-import com.work.planningservice.model.SchedulerException;
 import com.work.planningservice.model.Worker;
+import com.work.planningservice.model.WorkerException;
 import com.work.planningservice.repository.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,11 +28,14 @@ public class WorkerService {
         if (worker.isPresent()) {
             return worker.get();
         } else {
-            throw new SchedulerException("The worker with id " + id + " was not found");
+            throw new WorkerException("The worker with id " + id + " was not found");
         }
     }
 
     public Worker save(Worker worker) {
+        if (worker.getName() == null) {
+            throw new WorkerException("Invalid worker input");
+        }
         return workerRepository.save(worker);
     }
 }
