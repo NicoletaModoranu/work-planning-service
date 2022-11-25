@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface WorkerMapper {
 
-    WorkerDTO workerToWorkerDTO(Worker user);
+    WorkerDTO workerToWorkerDTO(Worker shift);
 
-    Worker workerDtoTOWorker(WorkerDTO userDto);
+    Worker workerDtoTOWorker(WorkerDTO shiftDto);
 }

@@ -1,22 +1,23 @@
 package com.work.planningservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
+import java.time.LocalDateTime;
 
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class WorkerDTO {
+public class ShiftDTO {
 
-    private Long workerId;
+    private Long shiftId;
 
-    private String name;
+    private WorkerDTO worker;
 
-//    private Set<ShiftDTO> shifts;
-
+    private String shiftStart;
 }
+

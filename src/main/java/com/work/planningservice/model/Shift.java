@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Setter
@@ -21,5 +22,9 @@ public class Shift {
     @ManyToOne
     @JoinColumn(name="worker_id", nullable=false)
     private Worker worker;
+
+    @Basic
+    private LocalDateTime shiftStart;
+
 }
 

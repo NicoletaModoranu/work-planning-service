@@ -54,7 +54,7 @@ class WorkerControllerTest {
         //given
         long id = 1L;
         Worker expectedWorker = new Worker(id, "John", null);
-        WorkerDTO expectedWorkerDto = new WorkerDTO(id, "John", null);
+        WorkerDTO expectedWorkerDto = new WorkerDTO(id, "John");
         when(workerService.getByID(1L)).thenReturn(expectedWorker);
         when(workerMapper.workerToWorkerDTO(expectedWorker)).thenReturn(expectedWorkerDto);
 
@@ -72,7 +72,7 @@ class WorkerControllerTest {
         //given
         long id = 1L;
         Worker expectedWorker = new Worker(id, "John", null);
-        WorkerDTO expectedWorkerDto = new WorkerDTO(id, "John", null);
+        WorkerDTO expectedWorkerDto = new WorkerDTO(id, "John");
         when(workerService.save(expectedWorker)).thenReturn(expectedWorker);
         when(workerMapper.workerDtoTOWorker(expectedWorkerDto)).thenReturn(expectedWorker);
 
