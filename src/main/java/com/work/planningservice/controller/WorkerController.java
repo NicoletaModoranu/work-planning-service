@@ -15,11 +15,15 @@ import java.util.List;
 @RestController
 public class WorkerController {
 
-    @Autowired
     WorkerService workerService;
 
-    @Autowired
     WorkerMapper workerMapper;
+
+    @Autowired
+    public WorkerController(WorkerService workerService, WorkerMapper workerMapper) {
+        this.workerService = workerService;
+        this.workerMapper = workerMapper;
+    }
 
     @GetMapping
     public ResponseEntity<List<WorkerDTO>> all() {
@@ -34,6 +38,6 @@ public class WorkerController {
     @PostMapping
     public ResponseEntity<WorkerDTO> newWorker(@RequestBody WorkerDTO workerDTO) {
         Worker savedUser = workerService.save(workerMapper.workerDtoTOWorker(workerDTO));
-        return new ResponseEntity<>(workerMapper.workerToWorkerDTO(savedUser), HttpStatus.OK);
+        return new ResponseEntity<>(workerMapper.workerToWorkerDTO(savedUser), HttpStatus.CREATED);
     }
 }

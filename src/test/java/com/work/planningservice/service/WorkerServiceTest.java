@@ -3,7 +3,6 @@ package com.work.planningservice.service;
 import com.work.planningservice.model.Worker;
 import com.work.planningservice.model.WorkerException;
 import com.work.planningservice.repository.WorkerRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -14,9 +13,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class WorkerServiceTest {
+class WorkerServiceTest {
 
     @Mock
     private WorkerRepository workerRepository;
@@ -31,7 +29,7 @@ public class WorkerServiceTest {
     }
 
     @Test
-    public void test_findAll() {
+    void test_findAll() {
         //given
         Mockito.when(workerRepository.findAll()).thenReturn(Arrays.asList(new Worker(1L, "John", null), new Worker(2L, "Mary", null)));
 
@@ -39,13 +37,13 @@ public class WorkerServiceTest {
         List<Worker> resultList = workerService.getAllWorkers();
 
         //then
-        assertEquals(resultList.size(), 2);
-        assertTrue(resultList.get(0).getName().equals("John"));
-        assertTrue(resultList.get(1).getName().equals("Mary"));
+        assertEquals(2, resultList.size());
+        assertEquals("John", resultList.get(0).getName());
+        assertEquals("Mary", resultList.get(1).getName());
     }
 
     @Test
-    public void test_getById_success() {
+    void test_getById_success() {
         //given
         Mockito.when(workerRepository.findByWorkerId(1L)).thenReturn(Optional.of(new Worker(1L, "John", null)));
 
@@ -58,7 +56,7 @@ public class WorkerServiceTest {
     }
 
     @Test
-    public void test_getById_workerNotFound() {
+    void test_getById_workerNotFound() {
         //given
         Mockito.when(workerRepository.findByWorkerId(1L)).thenReturn(Optional.empty());
 
