@@ -1,12 +1,10 @@
 package com.work.planningservice.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.work.planningservice.model.ShiftTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -19,5 +17,7 @@ public class ShiftDTO {
     private WorkerDTO worker;
 
     private String shiftStart;
+
+    private ShiftTime shiftTime;
 }
 
