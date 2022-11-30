@@ -1,6 +1,9 @@
 package com.work.planningservice.config;
 
+import com.work.planningservice.mapper.ValidationException;
+import com.work.planningservice.model.ShiftException;
 import com.work.planningservice.model.WorkerException;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,4 +34,33 @@ public class RestResponseEntityExceptionHandler
         return handleExceptionInternal(ex, "Something went wrong.",
                 new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
+
+    @ExceptionHandler(value
+            = {ValidationException.class})
+    protected ResponseEntity<Object> handleValidationException(
+            RuntimeException ex, WebRequest request) {
+
+        return handleExceptionInternal(ex, ex.getMessage(),
+                new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(value
+            = {ShiftException.class})
+    protected ResponseEntity<Object> handleWrongInputFields(
+            RuntimeException ex, WebRequest request) {
+
+        if (ex.getCause() instanceof IllegalArgumentException) {
+            return handleExceptionInternal(ex, ex.getMessage(),
+                    new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+        }
+
+        if (ex.getCause() instanceof ConstraintViolationException) {
+            return handleExceptionInternal(ex, "A shift already exists for the specified worker and day.",
+                    new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+        }
+
+        return handleExceptionInternal(ex, ex.getMessage(),
+                new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
+    }
+
 }

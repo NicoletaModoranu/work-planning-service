@@ -1,6 +1,7 @@
 package com.work.planningservice.service;
 
 import com.work.planningservice.model.Shift;
+import com.work.planningservice.model.ShiftException;
 import com.work.planningservice.model.Worker;
 import com.work.planningservice.repository.ShiftRepository;
 import com.work.planningservice.repository.WorkerRepository;
@@ -24,17 +25,27 @@ public class ShiftService {
 
 
     public Shift save(Shift shift) {
-
-        //check shift starts at 0, 8, 16
-        //check no shift on that day
-        //date validation and format
-        //what if the worker from shift is missing, or the id is missing - check
-        Optional<Worker> worker = workerRepository.findByWorkerId(shift.getWorker().getWorkerId());
-        if (worker.isPresent()){
-            shift.setWorker(worker.get());
+        attachWorker(shift);
+        try {
+            return shiftRepository.save(shift);
+        } catch (Exception e) {
+            throw new ShiftException(e.getMessage(), e.getCause());
         }
-        else throw new RuntimeException("invalid worker");
+    }
 
-        return shiftRepository.save(shift);
+    private Shift attachWorker(Shift shift) {
+        if (shift.getWorker() == null || (shift.getWorker() != null && shift.getWorker().getWorkerId() == null)) {
+            throw new IllegalArgumentException("Cannot save shift. Worker data was not found!");
+        }
+
+        long workerId = shift.getWorker().getWorkerId();
+        Optional<Worker> worker = workerRepository.findByWorkerId(workerId);
+        if (worker.isPresent()) {
+            shift.setWorker(worker.get());
+        } else {
+            throw new ShiftException("A worker with the " + workerId + " does not exist in DB.");
+        }
+
+        return shift;
     }
 }

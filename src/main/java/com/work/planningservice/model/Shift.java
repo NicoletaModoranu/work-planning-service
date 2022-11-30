@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @Table(name = "Shift", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"shiftStart", "worker_id"})})
+        @UniqueConstraint(columnNames = {"shiftDay", "worker_id"})})
 public class Shift {
 
     @Id
@@ -28,7 +28,7 @@ public class Shift {
 
     @NotNull
     @Basic
-    private LocalDate shiftStart;
+    private LocalDate shiftDay;
 
     @NotNull
     @Enumerated(EnumType.STRING)

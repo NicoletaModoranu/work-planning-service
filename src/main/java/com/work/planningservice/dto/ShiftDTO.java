@@ -16,7 +16,7 @@ public class ShiftDTO {
 
     private WorkerDTO worker;
 
-    private String shiftStart;
+    private String shiftDay;
 
     private ShiftTime shiftTime;
 }
