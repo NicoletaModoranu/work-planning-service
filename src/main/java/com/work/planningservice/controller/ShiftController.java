@@ -10,13 +10,11 @@ import com.work.planningservice.service.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RequestMapping("/shift")
 @RestController
@@ -33,9 +31,9 @@ public class ShiftController {
     }
 
     //get worker's shift in time interval, by id
-    public ResponseEntity<Set<ShiftDTO>> getWorkersShifts(Long workerId, Date start, Date end) {
-
-        return null;
+    @GetMapping
+    public ResponseEntity<Set<ShiftDTO>> getWorkersShifts(@RequestParam Long workerId, @RequestParam String dateStart, @RequestParam String dateEnd) {
+       return new ResponseEntity<>(shiftService.getShifts(workerId,dateStart,dateEnd).stream().map(shift -> shiftMapper.shiftToShiftDTO(shift)).collect(Collectors.toSet()), HttpStatus.OK);
     }
 
     @PostMapping
@@ -43,5 +41,4 @@ public class ShiftController {
         Shift shift = shiftService.save(shiftMapper.shiftDtoToShift(shiftDto));
         return new ResponseEntity<>(shiftMapper.shiftToShiftDTO(shift), HttpStatus.CREATED);
     }
-    //
 }

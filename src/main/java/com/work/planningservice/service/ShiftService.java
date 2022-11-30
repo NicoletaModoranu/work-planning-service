@@ -8,7 +8,10 @@ import com.work.planningservice.repository.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ShiftService {
@@ -47,5 +50,19 @@ public class ShiftService {
         }
 
         return shift;
+    }
+
+    public Set<Shift> getShifts(Long workerId, String dateStart, String dateEnd) {
+
+        if (workerId == null || dateStart == null || dateEnd == null) {
+            throw new ShiftException("WorkerId, dateStart and dateEnd are mandatory fields!");
+        }
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate formattedDateStart = LocalDate.parse(dateStart, dateTimeFormatter);
+        LocalDate formattedDateEnd = formattedDateEnd = LocalDate.parse(dateEnd, dateTimeFormatter);
+
+
+        return shiftRepository.findShifts(workerId, formattedDateStart, formattedDateEnd);
     }
 }
