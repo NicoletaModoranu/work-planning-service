@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -16,7 +14,5 @@ public class WorkerDTO {
     private Long workerId;
 
     private String name;
-
-//    private Set<ShiftDTO> shifts;
 
 }

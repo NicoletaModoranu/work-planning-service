@@ -60,8 +60,7 @@ public class ShiftService {
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate formattedDateStart = LocalDate.parse(dateStart, dateTimeFormatter);
-        LocalDate formattedDateEnd = formattedDateEnd = LocalDate.parse(dateEnd, dateTimeFormatter);
-
+        LocalDate formattedDateEnd = LocalDate.parse(dateEnd, dateTimeFormatter);
 
         return shiftRepository.findShifts(workerId, formattedDateStart, formattedDateEnd);
     }

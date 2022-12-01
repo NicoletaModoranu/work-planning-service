@@ -1,10 +1,8 @@
 package com.work.planningservice.model;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -21,16 +19,13 @@ public class Shift {
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     private Long shiftId;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "worker_id", nullable = false)
     private Worker worker;
 
-    @NotNull
     @Basic
     private LocalDate shiftDay;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     private ShiftTime shiftTime;
 
