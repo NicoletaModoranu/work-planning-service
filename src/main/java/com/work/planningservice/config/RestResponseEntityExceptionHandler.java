@@ -45,6 +45,15 @@ public class RestResponseEntityExceptionHandler
     }
 
     @ExceptionHandler(value
+            = {IllegalArgumentException.class})
+    protected ResponseEntity<Object> handleIllegalArgException(
+            RuntimeException ex, WebRequest request) {
+
+        return handleExceptionInternal(ex, ex.getMessage(),
+                new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(value
             = {ShiftException.class})
     protected ResponseEntity<Object> handleWrongInputFields(
             RuntimeException ex, WebRequest request) {
