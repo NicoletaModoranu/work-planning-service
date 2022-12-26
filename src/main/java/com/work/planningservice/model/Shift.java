@@ -1,5 +1,6 @@
 package com.work.planningservice.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "Shift", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"shiftDay", "worker_id"})})
 public class Shift {
