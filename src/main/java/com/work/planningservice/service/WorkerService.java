@@ -33,9 +33,6 @@ public class WorkerService {
     }
 
     public Worker save(Worker worker) {
-        if (worker.getName() == null) {
-            throw new WorkerException("Invalid worker input");
-        }
         return workerRepository.save(worker);
     }
 }

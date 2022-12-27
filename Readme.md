@@ -2,7 +2,11 @@
 
 Prerequisites: Docker
 
-Before starting the app run: docker compose -f docker-compose.yaml up  
+Before starting the app run: 
+```
+docker compose -f docker-compose.yaml up  
+```
+
 
 
 ## Requirements
@@ -54,5 +58,8 @@ http://localhost:8080/shift?workerId=1&dateStart=01-11-2022&dateEnd=30-11-2022
 todos: 
 add logs
 tests
+test exceptions in controller with mock mvc
+
 add validation on worker
 sonarlint issues
+javadocs

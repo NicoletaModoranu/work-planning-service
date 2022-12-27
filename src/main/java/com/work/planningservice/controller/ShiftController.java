@@ -33,12 +33,15 @@ public class ShiftController {
     @GetMapping
     public ResponseEntity<Set<ShiftDTO>> getWorkersShifts(@RequestParam Long workerId, @RequestParam String dateStart, @RequestParam String dateEnd) {
         logger.info("Entered getWorkersShifts with workerId = {}, dateStart = {}, dateEnd = {}", workerId, dateStart, dateEnd);
+
         return new ResponseEntity<>(shiftService.getShifts(workerId, dateStart, dateEnd).stream().map(shift -> shiftMapper.shiftToShiftDTO(shift)).collect(Collectors.toSet()), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<ShiftDTO> saveShift(@RequestBody ShiftDTO shiftDto) {
+        logger.info("Entered saveShift with shift = {}", shiftDto);
         Shift shift = shiftService.save(shiftMapper.shiftDtoToShift(shiftDto));
+
         return new ResponseEntity<>(shiftMapper.shiftToShiftDTO(shift), HttpStatus.CREATED);
     }
 }

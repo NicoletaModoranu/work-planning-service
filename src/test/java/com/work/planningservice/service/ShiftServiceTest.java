@@ -124,25 +124,6 @@ public class ShiftServiceTest {
         assertEquals(expectedShift.getShiftTime(), savedShift.getShiftTime());
     }
 
-    @Test
-    void test_saveShift_nullWorker_throwsIllegalArgEx() {
-        //given
-        Shift shift = getShift();
-        shift.setWorker(null);
-
-        //when
-        Exception resultedException = null;
-        try {
-            shiftService.save(shift);
-        } catch (Exception e) {
-            resultedException = e;
-        }
-
-        //then
-        assertEquals("Cannot save shift. Worker data was not found!", resultedException.getMessage());
-        assertTrue(resultedException instanceof IllegalArgumentException);
-    }
-
     private Shift getShift() {
         Worker w = new Worker();
         w.setWorkerId(1L);

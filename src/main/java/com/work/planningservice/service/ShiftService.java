@@ -53,11 +53,8 @@ public class ShiftService {
     }
 
     private Shift attachWorker(Shift shift) {
-        if (shift.getWorker() == null || (shift.getWorker() != null && shift.getWorker().getWorkerId() == null)) {
-            throw new IllegalArgumentException("Cannot save shift. Worker data was not found!");
-        }
-
         long workerId = shift.getWorker().getWorkerId();
+
         Optional<Worker> worker = workerRepository.findByWorkerId(workerId);
         if (worker.isPresent()) {
             shift.setWorker(worker.get());

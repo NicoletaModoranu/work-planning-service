@@ -59,15 +59,6 @@ public class ShiftControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-
-//    @Before
-//    public void beforeTest() {
-//        MockMvc mockMvc = standaloneSetup(shiftController)
-//                .setControllerAdvice(new RestResponseEntityExceptionHandler())
-//                .build();
-//    }
-
-
     @Test
     void test_getById_success() throws Exception {
         //given
