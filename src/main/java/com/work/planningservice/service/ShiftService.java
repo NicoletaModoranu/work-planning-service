@@ -1,6 +1,5 @@
 package com.work.planningservice.service;
 
-import com.work.planningservice.controller.ShiftController;
 import com.work.planningservice.model.Shift;
 import com.work.planningservice.model.ShiftException;
 import com.work.planningservice.model.Worker;

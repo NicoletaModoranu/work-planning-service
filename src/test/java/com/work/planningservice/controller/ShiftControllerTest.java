@@ -7,11 +7,9 @@ import com.work.planningservice.mapper.ShiftMapper;
 import com.work.planningservice.mapper.ValidationException;
 import com.work.planningservice.mapper.WorkerMapper;
 import com.work.planningservice.model.Shift;
-import com.work.planningservice.model.ShiftException;
 import com.work.planningservice.model.ShiftTime;
 import com.work.planningservice.model.Worker;
 import com.work.planningservice.service.ShiftService;
-import org.apache.el.util.Validation;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,6 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -37,8 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(ShiftController.class)
 @RunWith(SpringRunner.class)
-public class ShiftControllerTest {
-
+class ShiftControllerTest {
 
     @MockBean
     private ShiftService shiftService;

@@ -17,7 +17,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ShiftServiceTest {
+class ShiftServiceTest {
 
     @Mock
     private WorkerRepository workerRepository;
