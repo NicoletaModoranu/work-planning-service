@@ -2,12 +2,10 @@
 
 Prerequisites: Docker
 
-Before starting the app run: 
+Before starting the app, run: 
 ```
 docker compose -f docker-compose.yaml up  
 ```
-
-
 
 ## Requirements
 
@@ -23,9 +21,30 @@ Business requirements:
 
 Preferably write a couple of units tests.
 
+## Model Details
+
+### Shifts
+
+A shift is defined by an id, shift day, shift time and the worker's id.
+
+Shift day must me in the format _dd-MM-yyyy_.
+
+Shift time is an enum with the following options: SHIFT_0_8, SHIFT_8_16, SHIFT_16_24.
+
+When saving a shift, the shift day, shift time and worker's id are mandatory. See the Endpoints section for more details.
+### Worker
+
+A worker is defined by an _id_ and a _name_.
+
+When saving a worker, the _name_ is mandatory.
+
 ## Endpoints
 
 ### Save Worker
+POST http://localhost:8080/worker
+
+Body:
+
 ```
 {
     "workerName": "Example Name"
@@ -33,17 +52,23 @@ Preferably write a couple of units tests.
 ```
 
 ### Get worker by id
+GET
 
 ```
 http://localhost:8080/worker/1
 ```
 
 ### Filter shifts by worker id and dates
+
+GET
 ```
 http://localhost:8080/shift?workerId=1&dateStart=01-11-2022&dateEnd=30-11-2022
 ```
 
 ### Save Shift
+POST http://localhost:8080/shift
+
+Body: 
 ```
 {
     "worker":{
@@ -53,13 +78,3 @@ http://localhost:8080/shift?workerId=1&dateStart=01-11-2022&dateEnd=30-11-2022
     "shiftTime": "SHIFT_0_8"
 }
 ```
-
-
-todos: 
-add logs
-tests
-test exceptions in controller with mock mvc
-
-add validation on worker
-sonarlint issues
-javadocs

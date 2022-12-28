@@ -5,8 +5,6 @@ import com.work.planningservice.model.ShiftException;
 import com.work.planningservice.model.Worker;
 import com.work.planningservice.repository.ShiftRepository;
 import com.work.planningservice.repository.WorkerRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +15,6 @@ import java.util.Set;
 
 @Service
 public class ShiftService {
-
-    Logger logger = LoggerFactory.getLogger(ShiftService.class);
 
     private final ShiftRepository shiftRepository;
     private final WorkerRepository workerRepository;
@@ -36,8 +32,15 @@ public class ShiftService {
         }
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate formattedDateStart = LocalDate.parse(dateStart, dateTimeFormatter);
-        LocalDate formattedDateEnd = LocalDate.parse(dateEnd, dateTimeFormatter);
+        LocalDate formattedDateStart;
+        LocalDate formattedDateEnd;
+
+        try {
+            formattedDateStart = LocalDate.parse(dateStart, dateTimeFormatter);
+            formattedDateEnd = LocalDate.parse(dateEnd, dateTimeFormatter);
+        } catch (Exception e) {
+            throw new ShiftException("Could not parse provided dates!");
+        }
 
         return shiftRepository.findShifts(workerId, formattedDateStart, formattedDateEnd);
     }
@@ -51,7 +54,7 @@ public class ShiftService {
         }
     }
 
-    private Shift attachWorker(Shift shift) {
+    private void attachWorker(Shift shift) {
         long workerId = shift.getWorker().getWorkerId();
 
         Optional<Worker> worker = workerRepository.findByWorkerId(workerId);
@@ -60,7 +63,5 @@ public class ShiftService {
         } else {
             throw new ShiftException("A worker with the " + workerId + " does not exist in DB.");
         }
-
-        return shift;
     }
 }

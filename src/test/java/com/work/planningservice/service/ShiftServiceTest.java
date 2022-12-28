@@ -88,7 +88,6 @@ class ShiftServiceTest {
 
     }
 
-
     @Test
     void test_saveShift_throwsException() {
         //given

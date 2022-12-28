@@ -68,6 +68,11 @@ public class RestResponseEntityExceptionHandler
                     new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
         }
 
+        if (ex.getMessage().contains("parse")) {
+            return handleExceptionInternal(ex, ex.getMessage(),
+                    new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+        }
+
         return handleExceptionInternal(ex, ex.getMessage(),
                 new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
