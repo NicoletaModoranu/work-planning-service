@@ -1,16 +1,19 @@
 package com.work.planningservice.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
-@Table(name="Shift")
+@AllArgsConstructor
+@Table(name = "Shift", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"shiftDay", "worker_id"})})
 public class Shift {
 
     @Id
@@ -19,7 +22,14 @@ public class Shift {
     private Long shiftId;
 
     @ManyToOne
-    @JoinColumn(name="worker_id", nullable=false)
+    @JoinColumn(name = "worker_id", nullable = false)
     private Worker worker;
+
+    @Basic
+    private LocalDate shiftDay;
+
+    @Enumerated(EnumType.STRING)
+    private ShiftTime shiftTime;
+
 }
 

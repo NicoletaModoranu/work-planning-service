@@ -1,18 +1,23 @@
 package com.work.planningservice.dto;
 
+import com.work.planningservice.model.ShiftTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class WorkerDTO {
+public class ShiftDTO {
 
-    private Long workerId;
+    private Long shiftId;
 
-    private String name;
+    private WorkerDTO worker;
 
+    private String shiftDay;
+
+    private ShiftTime shiftTime;
 }
+

@@ -11,4 +11,5 @@ spring:
       hibernate:
         jdbc:
           batch_size: 50
+          time_zone: UTC
         default_batch_fetch_size: 50
