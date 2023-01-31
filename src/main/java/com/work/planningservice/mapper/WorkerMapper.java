@@ -15,7 +15,7 @@ public interface WorkerMapper {
         }
     }
 
-    WorkerDTO workerToWorkerDTO(Worker shift);
+    WorkerDTO workerToWorkerDTO(Worker worker);
 
-    Worker workerDtoTOWorker(WorkerDTO shiftDto);
+    Worker workerDtoTOWorker(WorkerDTO workerDto);
 }

@@ -27,7 +27,7 @@ Preferably write a couple of units tests.
 
 A shift is defined by an id, shift day, shift time and the worker's id.
 
-Shift day must me in the format _dd-MM-yyyy_.
+Shift day must be in the format _dd-MM-yyyy_.
 
 Shift time is an enum with the following options: SHIFT_0_8, SHIFT_8_16, SHIFT_16_24.
 
